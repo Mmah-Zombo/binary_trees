@@ -1,10 +1,9 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_inorder - function that creates a binary tree node
- * @tree: pointer to the parent node of the node to create
- * @func: pointer of function
- * Return: pointer to the new node, or NULL on failure
+ * binary_tree_inorder - traverse a binary tree using inorder
+ * @tree: pointer to the root nod of the tree
+ * @func: function to process the values of the node
  */
 void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
 {
