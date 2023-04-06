@@ -1,5 +1,6 @@
 #ifndef _BINARY_TREES_H_
 #define _BINARY_TREES_H_
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 #include <stddef.h>
 #include <stdlib.h>
