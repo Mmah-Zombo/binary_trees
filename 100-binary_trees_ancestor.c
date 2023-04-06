@@ -2,41 +2,45 @@
 
 /**
  * binary_trees_ancestor - finds the lowest common ancestor of two nodes
+ *
  * @first: pointer to the first node
  * @second: pointer to the second node
  *
- * Return: pointer to the lowest common ancestor node, or NULL if none found
+ * Return: pointer to the lowest common ancestor node, or NULL if not found
  */
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-					const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
-	size_t depth_first, depth_second;
+	const binary_tree_t *ptr1, *ptr2;
+	size_t depth1, depth2;
 
 	if (first == NULL || second == NULL)
 		return (NULL);
 
-	/* Get depth of each node */
-	depth_first = binary_tree_depth(first);
-	depth_second = binary_tree_depth(second);
+	ptr1 = first;
+	ptr2 = second;
+	depth1 = binary_tree_depth(ptr1);
+	depth2 = binary_tree_depth(ptr2);
 
-	/* Move deeper node up to the same level as the other node */
-	while (depth_first > depth_second)
+	while (depth1 > depth2)
 	{
-		first = first->parent;
-		depth_first--;
-	}
-	while (depth_second > depth_first)
-	{
-		second = second->parent;
-		depth_second--;
+		ptr1 = ptr1->parent;
+		depth1--;
 	}
 
-	/* Move both nodes up until they meet at the same ancestor */
-	while (first != second)
+	while (depth2 > depth1)
 	{
-		first = first->parent;
-		second = second->parent;
+		ptr2 = ptr2->parent;
+		depth2--;
 	}
 
-	return ((binary_tree_t *) first);
+	while (ptr1 != NULL && ptr2 != NULL)
+	{
+		if (ptr1 == ptr2)
+			return ((binary_tree_t *) ptr1);
+
+		ptr1 = ptr1->parent;
+		ptr2 = ptr2->parent;
+	}
+
+	return (NULL);
 }
